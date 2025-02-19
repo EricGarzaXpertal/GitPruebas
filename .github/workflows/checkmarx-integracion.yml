@@ -17,7 +17,5 @@ jobs:
           project_name: ${{ github.repository }}
           cx_tenant: Xpertal
           base_uri: https://ast.checkmarx.net
-          cx_client_id: integracion-checkmarx
-          cx_client_secret: EkG7g6nMsj5NoFVtMAios3X2kC2iCtcT
-          #cx_client_id: ${{ secrets.CX_CLIENT_ID }}
-          #cx_client_secret: ${{ secrets.CX_CLIENT_SECRET }}
+          cx_client_id: ${{ secrets.CX_CLIENT_ID }}
+          cx_client_secret: ${{ secrets.CX_CLIENT_SECRET }}
