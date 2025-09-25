@@ -1,2 +1,0 @@
-cx_client_id: testAPIKEY123
-cx_client_secret: testtestAPIKEY123
