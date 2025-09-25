@@ -2,4 +2,4 @@ test prueba 1
 AWS_ACCESS_KEY_ID=TEST_AWS_KEY_ABCD1234EFGH5678
 AWS_SECRET_ACCESS_KEY=TEST_AWS_SECRET_abcdefgh1234567890
 cx_client_id: testAPIKEY123
-cx_client_secret: testtestAPIKEY123112
+cx_client_secret: testtestAPIKEY12311211
