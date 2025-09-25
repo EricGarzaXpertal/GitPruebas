@@ -17,7 +17,8 @@ jobs:
           project_name: ${{ github.repository }}
           cx_tenant: Xpertal
           base_uri: https://ast.checkmarx.net
-          cx_client_id: ${{ secrets.CX_CLIENT_ID }}
-          cx_client_secret: ${{ secrets.CX_CLIENT_SECRET }}
+          #cx_client_id: ${{ secrets.CX_CLIENT_ID }}
+          #cx_client_secret: ${{ secrets.CX_CLIENT_SECRET }}
           #cx_client_secret: contrasena123
-          additional_params: --scan-types sast,sca,scs
+          checkmarx_username: ${{ secrets.CHECKMARX_USERNAME }}
+          checkmarx_password: ${{ secrets.CHECKMARX_PASSWORD }}
