@@ -1,0 +1,23 @@
+name: Checkmarx One Scan
+on:
+  push:
+    branches:
+      - main
+      - master
+      - dev
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      # This step creates the Checkmarx One scan
+      - name: Checkmarx One scan
+        uses: checkmarx/ast-github-action@main
+        with:
+          project_name: ${{ github.repository }}
+          cx_tenant: Xpertal
+          base_uri: https://ast.checkmarx.net
+          cx_client_id: ${{ secrets.CX_CLIENT_ID }}
+          cx_client_secret: ${{ secrets.CX_CLIENT_SECRET }}
+          additional_params: --report-format pdf,sarif --output-path . --output-name GitPruebas --report-pdf-options Sast,Sca,Iac-Security --threshold "sast-high=100; sca-high=100; iac-security=100; api-security=100" --filter "state=CONFIRMED;TO_VERIFY"
