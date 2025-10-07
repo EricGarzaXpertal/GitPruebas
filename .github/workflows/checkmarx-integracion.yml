@@ -42,7 +42,7 @@ jobs:
           cx_client_secret: ${{ secrets.CX_CLIENT_SECRET }}
           #cx_client_id: testingkey1
           #cx_client_secret: testingkey123123122a
-          additional_params: --report-format pdf,sarif --output-path . --output-name GitPruebas --report-pdf-options Sast,Sca,Iac-Security --threshold "sast-high=100; sca-high=100; iac-security=100; api-security=100" --filter "state=CONFIRMED;TO_VERIFY" --scs-repo-url https://github.com/EricGarzaXpertal/GitPruebas.git
+          additional_params: --report-format pdf,sarif --output-path . --output-name GitPruebas --report-pdf-options Sast,Sca,Iac-Security --threshold "sast-high=100; sca-high=100; iac-security=100; api-security=100" --filter "state=CONFIRMED;TO_VERIFY" --scs-engines scorecard --scs-repo-url https://github.com/EricGarzaXpertal/GitPruebas.git --scs-repo-token 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
 
       - name: Upload SAST PDF report
         if: always()
