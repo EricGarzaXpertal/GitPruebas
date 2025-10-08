@@ -49,9 +49,6 @@ jobs:
             --report-pdf-options sast,sca,iac-security
             --threshold "sast-high=100;sca-high=100;iac-security=100;api-security=100"
             --filter "state=CONFIRMED;TO_VERIFY"
-            --scs-engines scorecard
-            --scs-repo-url https://github.com/EricGarzaXpertal/GitPruebas.git
-            --scs-repo-token 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
             
       - name: Upload SAST PDF report
         if: always()
