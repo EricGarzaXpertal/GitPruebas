@@ -52,6 +52,9 @@ jobs:
             --scs-engines scorecard
             --scs-repo-url https://github.com/EricGarzaXpertal/GitPruebas.git
             --scs-repo-token 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
+            --scs-repo-token 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Q
+            --scs-repo-token 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QQQ
+            --scs-repo-token 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QQQQQ
             
       - name: Upload SAST PDF report
         if: always()
