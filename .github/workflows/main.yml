@@ -73,7 +73,7 @@ jobs:
       - name: Secret Scan
         if: always()
         run: |
-          echo "Resultados Escaneo de Secretos"
+          echo "Resultados Escaneo de Secretos" > secret_scan_results.txt
           if [ -f "GitPruebas.json" ]; then
             jq -r '
               .results[]
