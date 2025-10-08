@@ -79,8 +79,14 @@ jobs:
               .results[]
               | select(.type == "sscs-secret-detection")
               | "Tipo Secret: \(.data.ruleName)\nArchivo y Linea de código: \(.data.filename):\(.data.line)\nSeveridad: \(.severity)\nDescripción: \(.description)\n---"
-            ' GitPruebas.json || echo "No se encontraron Secrets."
+            ' GitPruebas.json || echo "No se encontraron Secrets." >> secret_scan_results.txt
           else
-            echo "No se encontró el reporte en el formato indicado (.json)"
+            echo "No se encontró el reporte en el formato indicado (.json)" >> secret_scan_results.txt
           fi
+      - name: Upload Secret Scan Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Checkmarx Secret Scan Report
+          path: secret_scan_results.txt
 
