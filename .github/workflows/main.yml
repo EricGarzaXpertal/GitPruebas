@@ -79,9 +79,9 @@ jobs:
               .results[]
               | select(.type == "sscs-secret-detection")
               | "Tipo Secret: \(.data.ruleName)\nArchivo y Linea de código: \(.data.filename):\(.data.line)\nSeveridad: \(.severity)\nDescripción: \(.description)\n---"
-            ' GitPruebas.json || echo "No se encontraron Secrets." >> secret_scan_results.txt
+            ' GitPruebas.json || echo "No se encontraron Secrets." > secret_scan_results.txt
           else
-            echo "No se encontró el reporte en el formato indicado (.json)" >> secret_scan_results.txt
+            echo "No se encontró el reporte en el formato indicado (.json)" > secret_scan_results.txt
           fi
       - name: Upload Secret Scan Report
         if: always()
