@@ -55,7 +55,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Checkmarx SAST Report
-          path: GitPruebas.pdf, GitPruebas.json
+          path: GitPruebas.json
  
       - name: Upload SARIF to GitHub
         if: always()
