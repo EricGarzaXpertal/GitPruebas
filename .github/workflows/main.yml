@@ -55,38 +55,32 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Checkmarx SAST Report
+          path: GitPruebas.pdf
+          
+      - name: Upload SAST JSON report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Checkmarx SAST Report
           path: GitPruebas.json
- 
+          
       - name: Upload SARIF to GitHub
         if: always()
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: GitPruebas.sarif
-
-      - name: Ver contenido del JSON generado
-        if: always()
-        run: |
-          echo "📄 Listado de archivos en el directorio actual:"
-          ls -lh
-          echo ""
-          echo "🧠 Primeras líneas del archivo GitPruebas.json (si existe):"
-          if [ -f "GitPruebas.json" ]; then
-            head -n 30 GitPruebas.json
-          else
-            echo "❌ El archivo GitPruebas.json no existe."
-          fi
           
-      - name: Mostrar hallazgos de Secret Scan (SCS)
+      - name: Secret Scan
         if: always()
         run: |
-          echo "🔍 Buscando hallazgos de secretos en GitPruebas.json..."
+          echo "Resultados Escaneo de Secretos"
           if [ -f "GitPruebas.json" ]; then
             jq -r '
               .results[]
               | select(.type == "sscs-secret-detection")
-              | "🔑 Tipo: \(.data.ruleName)\n📂 Archivo: \(.data.filename):\(.data.line)\n⚠️ Severidad: \(.severity)\n📝 Descripción: \(.description)\n---"
-            ' GitPruebas.json || echo "⚠️ No se encontraron secretos en el análisis."
+              | "Tipo Secret: \(.data.ruleName)\nArchivo y Linea de código: \(.data.filename):\(.data.line)\nSeveridad: \(.severity)\nDescripción: \(.description)\n---"
+            ' GitPruebas.json || echo "No se encontraron Secrets."
           else
-            echo "❌ No se encontró el archivo GitPruebas.json. Verifica que el formato JSON esté habilitado en --report-format."
+            echo "No se encontró el reporte en el formato indicado (.json)"
           fi
 
