@@ -82,10 +82,11 @@ jobs:
           echo "🔍 Buscando hallazgos de secretos en GitPruebas.json..."
           if [ -f "GitPruebas.json" ]; then
             jq -r '
-              .results[] 
-              | select((.category | ascii_downcase | contains("secret")) or (.query_name | ascii_downcase | contains("secret")))
-              | "🔑 Tipo: \(.query_name)\n📂 Archivo: \(.file_name)\n📏 Severidad: \(.severity)\n---"
+              .results[]
+              | select(.type == "sscs-secret-detection")
+              | "🔑 Tipo: \(.data.ruleName)\n📂 Archivo: \(.data.filename):\(.data.line)\n⚠️ Severidad: \(.severity)\n📝 Descripción: \(.description)\n---"
             ' GitPruebas.json || echo "⚠️ No se encontraron secretos en el análisis."
           else
             echo "❌ No se encontró el archivo GitPruebas.json. Verifica que el formato JSON esté habilitado en --report-format."
           fi
+
