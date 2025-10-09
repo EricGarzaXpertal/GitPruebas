@@ -45,7 +45,7 @@ jobs:
           additional_params: |
             --report-format pdf,sarif,json
             --output-path .
-            --output-name GitPruebas
+            --output-name Resultados
             --report-pdf-options sast,sca,iac-security
             --threshold "sast-high=100;sca-high=100;iac-security=100;api-security=100"
             --filter "state=CONFIRMED;TO_VERIFY"
@@ -55,14 +55,14 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Checkmarx SAST Report
-          path: GitPruebas.pdf
+          path: Resultados.pdf
           
       - name: Upload SAST JSON report
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: Checkmarx JSON Report
-          path: GitPruebas.json
+          path: Resultados.json
           
       - name: Upload SARIF to GitHub
         if: always()
@@ -74,12 +74,12 @@ jobs:
         if: always()
         run: |
           echo "Resultados Escaneo de Secretos" > secret_scan_results.txt
-          if [ -f "GitPruebas.json" ]; then
+          if [ -f "Resultados.json" ]; then
             jq -r '
               .results[]
               | select(.type == "sscs-secret-detection")
               | "Tipo Secret: \(.data.ruleName)\nArchivo y Linea de código: \(.data.filename):\(.data.line)\nSeveridad: \(.severity)\nDescripción: \(.description)\n---"
-            ' GitPruebas.json >> secret_scan_results.txt || echo "No se encontraron Secrets." >> secret_scan_results.txt
+            ' Resultados.json >> secret_scan_results.txt || echo "No se encontraron Secrets." >> secret_scan_results.txt
           else
             echo "No se encontró el reporte en el formato indicado (.json)" >> secret_scan_results.txt
           fi
